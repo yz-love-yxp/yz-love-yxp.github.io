@@ -28,7 +28,7 @@
 </head>
 <body>
 	<!-- /////////////////////////////////////////Navigation -->
-    <nav id="menu" class="navbar navbar-default navbar-fixed-top">
+    <nav id="menu" class="navbar navbar-default navbar-fixed-top hide">
 		<div class="container"> 
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
@@ -50,7 +50,7 @@
 	<!-- Navigation -->
 
 	<!-- /////////////////////////////////////////Header -->
-	<header class="text-center" name="home">
+	<header class="text-center hide" name="home">
 		<div class="intro-text">
 			<h1 class="wow fadeInDown">欢迎回到 <strong><span class="color">我们的小家</span></strong></h1>
 			<p class="wow fadeInDown"><strong><span style="color: red;">❤</span> 杨政和杨新平的温暖小屋 <span style="color: red;">❤</span></strong></p>
@@ -60,7 +60,7 @@
 	<!-- Header -->
 	
 	<!-- /////////////////////////////////////////Content -->
-	<div id="page-content" class="index-page">
+	<div id="page-content" class="index-page hide">
 		<!-- ////////////Content Box 01 -->
 		<section id="photo-wall" class="box-content box-style text-center">
 			<div class="container">
@@ -275,13 +275,23 @@
 	
 	<!-- /////////////////////////////////////////Footer -->
 	<footer>
-		<div id="footer">
+		<div id="footer" class="hide">
 			<div class="container">
 				<p>Copyright &copy; 2021.Company name All rights reserved.</p>
 			</div>
 		</div>
 	</footer>
 	<!-- Footer -->
+
+	<!-- 验证密码卡片 -->
+	<div style="display: flex;align-items: center;justify-content: center;height:100vh;background-color: #9eeaff;" id="verify-card">
+		<div style="background-color: #ffffff;box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);};padding: 30px;border-radius: 10px;">
+			<p style="font-size: 20px"><strong>请输入验证密码:</strong></p>
+			<input type="password" placeholder="密码" id="password" style="width: 400px">
+			<a href="#" class="btn btn-primary" style="font-size: 15px;margin-top: 10px;" onclick="verifyStart()">进入页面</a>
+		</div>
+	</div>
+
 	
 	<!-- Portfolio Modals --> 
 <!-- Use the modals below to showcase details about your portfolio projects! --> 
@@ -743,6 +753,8 @@
 <script type="text/javascript" src="js/wow.min.js"></script> 
 <script type="text/javascript" src="js/jquery.isotope.js"></script> 
 <script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/sm3.js"></script>
+<script type="text/javascript" src="js/hide.js"></script>
 
 <style>
 .copyrights{text-indent:-9999px;height:0;line-height:0;font-size:0;overflow:hidden;}
