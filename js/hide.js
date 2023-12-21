@@ -6,7 +6,7 @@ function hide() {
 function verifyStart() {
     function verify(password) {
         var result = false;
-        $.getJSON("json/password-digest.json?callback=?", function(data) {
+        $.getJSON("json/password-digest.json", function(data) {
             console.log(data);
             console.log(sm3Digest(password));
             if (sm3Digest(password) == data["password-digest"]) {
