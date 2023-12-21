@@ -10,9 +10,11 @@ function verifyStart() {
             console.log(data);
             console.log(sm3Digest(password));
             if (sm3Digest(password) == data["password-digest"]) {
+            console.log("right!")
                 result = true;
             }
         });
+        console.log(result)
         return result;
     }
     password = $('#password').val();
