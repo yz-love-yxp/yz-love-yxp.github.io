@@ -16,7 +16,7 @@ img{max-width:100%;	height: auto;width: auto\9; /* ie8 */}
 a {color: #79b6e4;-webkit-transition: all .2s ease-in-out;-moz-transition: all .2s ease-in-out;transition: all .2s ease-in-out;}
 a:hover, a:focus {
 	text-decoration: none;
-	color: #f1c40f;
+	color: #F1C40F;
 }
 
 h1 {font-weight: 700;}
@@ -100,8 +100,8 @@ article {padding: 100px 0;}
 .heading h2{font-weight: 400;margin-bottom: 26px;}
 
 .box-content.box-style {}
-.box-content.box-style{padding: 80px 0;background: #F1C40F;}
-.box-content.box-style i.fa {font-size: 30px;padding: 5px;color: #f1c40f;}
+.box-content.box-style{padding: 80px 0;background: #ffffff;}
+.box-content.box-style i.fa {font-size: 30px;padding: 5px;color: #ffffff;}
 .box-content.box-style hr {background: #a9971c;}
 
 /* ---------------------------------------------------------------------------- */
@@ -132,7 +132,7 @@ ol.type li a:hover {background: #f7dc6f;}
 .hover-bg .hover-text>i {opacity: 0;-webkit-transform: translateY(0);transform: translateY(0);transition: all 0.3s;}
 .hover-bg:hover .hover-text>i {opacity: 1;-webkit-backface-visibility: hidden;-webkit-transform: translateY(100%);transform: translateY(100%);}
 .hover-bg:hover .hover-text {opacity: 1;}
-.portfolio-modal .modal-content {padding: 100px 0;min-height: 100%;border: 0;border-radius: 0;text-align: center;background-clip: border-box;-webkit-box-shadow: none;box-shadow: none;background: #f1c40f;}
+.portfolio-modal .modal-content {padding: 100px 0;min-height: 100%;border: 0;border-radius: 0;text-align: center;background-clip: border-box;-webkit-box-shadow: none;box-shadow: none;background: #ffffff;}
 .portfolio-item {margin-bottom: 30px;}
 .portfolio-item .hover-bg {height: 260px;overflow: hidden;position: relative;}
 .portfolio-modal .modal-content h2 {margin-bottom: 15px;font-size: 2.5em;}
@@ -188,7 +188,7 @@ a:focus,
 .btn:active.focus, 
 .btn.active.focus {outline: none;outline-offset: none;}
 
-.btn-default {color: #294d57;font-family: 'Open Sans', sans-serif;background-color: #f1c40f;border: 0;margin: 0 8px;font-size: 18px;transition: all 0.5s;}
+.btn-default {color: #294d57;font-family: 'Open Sans', sans-serif;background-color: #F1C40F;border: 0;margin: 0 8px;font-size: 18px;transition: all 0.5s;}
 .btn-default:hover, 
 .btn-default:focus, 
 .btn-default.focus, 
