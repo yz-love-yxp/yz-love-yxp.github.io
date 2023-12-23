@@ -137,7 +137,7 @@ ol.type li a:hover {background: #f7dc6f;}
 .portfolio-item .hover-bg {height: 260px;overflow: hidden;position: relative;}
 .portfolio-modal .modal-content h2 {margin-bottom: 15px;font-size: 2.5em;}
 .portfolio-modal .modal-content p {margin-bottom: 30px;}
-.portfolio-modal .modal-content p.item-intro {margin: 10px 0 30px;font-size: 14px;font-style: italic;}
+.portfolio-modal .modal-content p.item-intro {margin: 10px 0 30px;font-size: 18px;font-weight: bold;}
 .portfolio-modal .modal-content ul.list-inline {margin-top: 0;margin-bottom: 30px;}
 .portfolio-modal .modal-content img {margin-bottom: 30px;}
 .portfolio-modal .close-modal {position: absolute;top: 25px;right: 25px;width: 75px;height: 75px;background-color: transparent;cursor: pointer;}
