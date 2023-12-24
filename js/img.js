@@ -22,6 +22,9 @@ function getImgs(page) {
 			$("#home-subtitle" + index).parent().parent().attr("href", "#portfolioModal" + (i + 1)); // 设置跳转
 			$("#home-subtitle" + index).parent().parent().parent().parent().parent().addClass(categoryDist[imgs[i]["category"]]); // 设置分类
 			// 设置块信息对应的model
+			if ($("#portfolioModal" + index).length > 0) {
+				$("#portfolioModal" + index).remove();
+			} 
 			let nowModel = $(
 				`
 				<div class="portfolio-modal modal fade" id="portfolioModal` 
@@ -74,3 +77,16 @@ function getImgs(page) {
 		}
 	});
 }
+
+function newImg(imgSeq) {
+	
+}
+
+// function getFileContent(file) {
+// 	const fileReader = new FileReader();
+// 	fileReader.onloadend = (ev) => {
+// 		const md5 = CryptoJS.MD5(CryptoJS.enc.Latin1.parse(ev.target.result)).toString(CryptoJS.enc.Hex);
+// 		console.log(md5);
+// 	}
+// 	fileReader.readAsBinaryString(file);
+// }

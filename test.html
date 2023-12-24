@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hash算法</title>
+	<script src="https://cdn.bootcdn.net/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    window.onload = function () {
+        function fileMd5Sum(file) {
+            const fileReader = new FileReader();
+            fileReader.onloadend = (ev) => {
+                const md5 = CryptoJS.MD5(CryptoJS.enc.Latin1.parse(ev.target.result)).toString(CryptoJS.enc.Hex);
+                console.log(md5);
+            }
+            fileReader.readAsBinaryString(file);
+        }
+
+        // 获取文件
+        let file = document.getElementById("file");
+        file.addEventListener("change", function () {
+            fileMd5Sum(file.files[0]);
+        })
+    }
+</script>
+<input type="file" id="file"/>
+</body>
+</html>
+
