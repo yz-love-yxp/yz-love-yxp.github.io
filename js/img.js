@@ -4,15 +4,32 @@ const categoryDist = {
 	"重大事件": "sapa",
 	"搞怪": "paris"
 }
+const preApi = "https://api.github.com/repos/yz-love-yxp/yz-love-yxp.github.io/contents/json/img";
 
 function getImgs(page) {
-	$.getJSON("json/img"+page+".json", function(data) {
-	    var imgs = data["imgs"];
+	$.get(preApi + page + ".json", function(apiData, status){
+		// 获取sha、data
+		sha = apiData["sha"];
+		pageData = JSON.parse(
+			CryptoJS.enc.Utf8.stringify(
+				CryptoJS.enc.Base64.parse(
+					apiData["content"].replace(/\n/g, ""))));
+		// 按img获取data
+		var imgs = pageData["imgs"];
 		var lastModel = $("#portfolioModalNew");
 		for (let i = 0; i < imgs.length; i++) {
 			// 获取解密后的主页块信息
 			let [img, title, subtitle, address, description] = ["de-img", "title", "subtitle", "address", "description"].map((key)=>{
-				return CryptoJS.AES.decrypt(imgs[i][key], CryptoJS.MD5(password).toString(), {"mode": CryptoJS.mode.ECB}).toString(CryptoJS.enc.Utf8);
+				return CryptoJS.AES.decrypt(imgs[i][key], sk, {"mode": CryptoJS.mode.ECB}).toString(CryptoJS.enc.Utf8);
+			})
+			dePageData.push({
+				"img": img,
+				"title": title,
+				"subTitle": subtitle,
+				"address": address,
+				"description": description,
+				"time": imgs[i]["time"],
+				"category": imgs[i]["category"]
 			})
 			// 设置主页块信息
 			let index = i + 1;
@@ -63,6 +80,7 @@ function getImgs(page) {
 							  + imgs[i]["category"] +
 							  `</li>
 				            </ul>
+							<a href="#portfolioModalNew"><button type="button" class="btn btn-primary"  data-dismiss="modal">修改信息</button></a>
 				            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> 关闭页面</button>
 				          </div>
 				        </div>
@@ -78,15 +96,52 @@ function getImgs(page) {
 	});
 }
 
-function newImg(imgSeq) {
-	
+function setNowClick(index) {
+	nowClick = index;
+	$("#newTime").val(dePageData[index-1]["time"])
+	$("#newAddress").val(dePageData[index-1]["address"])
+	$("#newCategory").val(dePageData[index-1]["category"])
+	$("#newTitle").val(dePageData[index-1]["title"])
+	$("newSubtitle").val(dePageData[index-1]["subtitle"])
+	$("newDescription").val(dePageData[index-1]["description"])
 }
 
-// function getFileContent(file) {
-// 	const fileReader = new FileReader();
-// 	fileReader.onloadend = (ev) => {
-// 		const md5 = CryptoJS.MD5(CryptoJS.enc.Latin1.parse(ev.target.result)).toString(CryptoJS.enc.Hex);
-// 		console.log(md5);
-// 	}
-// 	fileReader.readAsBinaryString(file);
-// }
+function encrypt(pt) {
+	return CryptoJS.AES.encrypt(pt, sk, {"mode": CryptoJS.mode.ECB}).toString();
+}
+
+function newImg() {
+	// let reader = new FileReader();
+	// reader.readAsDataURL($("#newFile").prop("files")[0]);
+	pageData["imgs"][nowClick-1] = {
+		"time": $("#newTime").val(),
+		// "address": encrypt($("#newAddress").val()),
+		"address": encrypt($("#newAddress").val()),
+		"title": encrypt($("#newTitle").val()),
+		"subtitle": encrypt($("#newSubTitle").val()),
+		"description": encrypt($("#newDescription").val()),
+		"category": encrypt($("#newCategory").val()),
+		"de-img": encrypt(nowImg)
+	}
+	$.ajax({
+		"url": preApi + pagination.pages.pageNo + ".json",
+		"method": "PUT",
+		"dataType": "json",
+		"data": JSON.stringify({
+			"message": "测试更新文件接口",
+			"content": CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(JSON.stringify(pageData))),
+			"sha": sha
+		}),
+		success: function (result) {
+			console.log("修改成功")
+		},
+		error: (err) => {
+			console.log(err)
+		},
+		"headers": {
+			'Authorization': 'Bearer ' + token,
+			"content-type": "application/json"
+		},
+	})
+	console.log(pageData)
+}
