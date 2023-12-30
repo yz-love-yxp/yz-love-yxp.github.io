@@ -8,7 +8,7 @@ const preApi1 = "https://api.github.com/repos/yz-love-yxp/yz-love-yxp.github.io/
 const preApi2 = "https://raw.githubusercontent.com/yz-love-yxp/yz-love-yxp.github.io/main/json/img"
 
 function getImgs(page) {
-	$.getJSON(preApi2+page+".json", function(apiData) {
+	$.getJSON("json/img"+page+".json", function(apiData) {
 		pageData = apiData;
 		for (let i = 0; i < 16; i++) {
 			// 初始化：置空/删除原块信息对应的model
