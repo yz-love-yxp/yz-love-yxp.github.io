@@ -4,8 +4,7 @@ const categoryDist = {
 	"重大事件": "sapa",
 	"搞怪": "paris"
 }
-const preApi1 = "https://api.github.com/repos/yz-love-yxp/yz-love-yxp.github.io/contents/json/img";
-const preApi2 = "https://raw.githubusercontent.com/yz-love-yxp/yz-love-yxp.github.io/main/json/img"
+const preApi = "https://api.github.com/repos/yz-love-yxp/yz-love-yxp.github.io/contents/json/img";
 
 function getImgs(page) {
 	$.getJSON("json/img"+page+".json", function(apiData) {
@@ -113,7 +112,7 @@ function newImg() {
 		"category": encrypt($("#newCategory").val()),
 		"de-img": encrypt(nowImg)
 	}
-	$.get(preApi1 + pagination.pages.pageNo + ".json", function(apiData, status){
+	$.get(preApi + pagination.pages.pageNo + ".json", function(apiData, status){
 		sha = apiData["sha"]
 		$.ajax({
 			"url": preApi + pagination.pages.pageNo + ".json",
@@ -139,5 +138,4 @@ function newImg() {
 			},
 		})
 	});
-	console.log(pageData)
 }
