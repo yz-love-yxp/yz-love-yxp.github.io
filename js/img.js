@@ -9,6 +9,7 @@ const preApi = "https://api.github.com/repos/yz-love-yxp/yz-love-yxp.github.io/c
 function getImgs(page) {
 	$.getJSON("json/img"+page+".json", function(apiData) {
 		pageData = apiData;
+		dePageData = [];
 		for (let i = 0; i < 16; i++) {
 			// 初始化：置空/删除原块信息对应的model
 			let index = i + 1;
@@ -22,9 +23,11 @@ function getImgs(page) {
 			}
 			// 若在有效范围内及为空
 			if (pageData["imgs"][i]) {
+				dePageData[i] = pageData["imgs"][i];
 				let [img, title, subtitle, address, description] = ["de-img", "title", "subtitle", "address", "description"].map((key)=>{
-					return CryptoJS.AES.decrypt(pageData["imgs"][i][key], sk, {"mode": CryptoJS.mode.ECB}).toString(CryptoJS.enc.Utf8);
-				})
+					dePageData[i][key] = CryptoJS.AES.decrypt(pageData["imgs"][i][key], sk, {"mode": CryptoJS.mode.ECB}).toString(CryptoJS.enc.Utf8);
+					return dePageData[i][key];
+				});
 				// 设置主页块信息
 				$("#img" + index).attr("src", img); // 设置图片
 				$(".home-title" + index).text(title); // 设置标题
@@ -87,14 +90,9 @@ function getImgs(page) {
 
 function setNowClick(index) {
 	nowClick = index;
-	if (pageData["imgs"][index-1]) {
-		$("#newTime").val(pageData["imgs"][index-1]["time"])
-		$("#newAddress").val(pageData["imgs"][index-1]["address"])
-		$("#newCategory").val(pageData["imgs"][index-1]["category"])
-		$("#newTitle").val(pageData["imgs"][index-1]["title"])
-		$("newSubtitle").val(pageData["imgs"][index-1]["subtitle"])
-		$("newDescription").val(pageData["imgs"][index-1]["description"])
-	}
+	["time", "address", "category", "title", "subtitle", "description"].map((key)=>{
+		$("new" + key[0].toUpperCase() + key.substring(1)).val(dePageData[index-1] ? dePageData[index-1][key] :"");
+	})
 }
 
 function encrypt(pt) {
@@ -102,9 +100,9 @@ function encrypt(pt) {
 }
 
 function newImg() {
+	console.log($("#newTitle").val())
 	pageData["imgs"][nowClick-1] = {
 		"time": $("#newTime").val(),
-		// "address": encrypt($("#newAddress").val()),
 		"address": encrypt($("#newAddress").val()),
 		"title": encrypt($("#newTitle").val()),
 		"subtitle": encrypt($("#newSubTitle").val()),
